@@ -1,5 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactManager">
+    <artifact type="war" name="CoffeeMachine:war">
+      <output-path>$PROJECT_DIR$/target</output-path>
+      <properties id="maven-jee-properties">
+        <options>
+          <module>CoffeeMachine</module>
+          <packaging>war</packaging>
+        </options>
+      </properties>
+      <root id="archive" name="CoffeeMachine.war">
+        <element id="artifact" artifact-name="CoffeeMachine:war exploded" />
+      </root>
+    </artifact>
+    <artifact type="exploded-war" name="CoffeeMachine:war exploded">
+      <output-path>$PROJECT_DIR$/target/CoffeeMachine</output-path>
+      <properties id="maven-jee-properties">
+        <options>
+          <exploded>true</exploded>
+          <module>CoffeeMachine</module>
+          <packaging>war</packaging>
+        </options>
+      </properties>
+      <root id="root">
+        <element id="directory" name="WEB-INF">
+          <element id="directory" name="classes">
+            <element id="module-output" name="CoffeeMachine" />
+          </element>
+          <element id="directory" name="lib">
+            <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.6" />
+            <element id="library" level="project" name="Maven: commons-dbcp:commons-dbcp:1.4" />
+            <element id="library" level="project" name="Maven: commons-pool:commons-pool:1.5.4" />
+            <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
+            <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-core:2.9.1" />
+            <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-api:2.9.1" />
+          </element>
+        </element>
+        <element id="directory" name="META-INF">
+          <element id="file-copy" path="$PROJECT_DIR$/target/CoffeeMachine/META-INF/MANIFEST.MF" />
+        </element>
+        <element id="javaee-facet-resources" facet="CoffeeMachine/web/Web" />
+      </root>
+    </artifact>
+  </component>
   <component name="CompilerConfiguration">
     <annotationProcessing>
       <profile name="Maven default annotation processors profile" enabled="true">
@@ -13,7 +56,9 @@
       <module name="CoffeeMachine" target="1.8" />
     </bytecodeTargetLevel>
   </component>
-  <component name="Encoding" addBOMForNewFiles="with NO BOM" />
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$" />
+  </component>
   <component name="InspectionProjectProfileManager">
     <profile version="1.0">
       <option name="myName" value="Project Default" />
@@ -247,6 +292,9 @@
       <listeners />
       <method />
     </configuration>
+  </component>
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
   </component>
   <component name="libraryTable">
     <library name="Maven: com.sun.mail:javax.mail:1.6.2">

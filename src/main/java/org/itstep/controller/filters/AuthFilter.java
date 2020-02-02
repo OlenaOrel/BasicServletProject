@@ -1,5 +1,7 @@
 package org.itstep.controller.filters;
 
+import org.itstep.model.entity.User;
+
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,9 +27,28 @@ public class AuthFilter implements Filter {
         System.out.println(session);
         System.out.println("Role: " + session.getAttribute("role"));
         System.out.println("Logged user: " + context.getAttribute("loggedUsers"));
+        User.ROLE role = (User.ROLE) session.getAttribute("role");
+        String path = req.getRequestURI();
+        if (role == null || role.equals(User.ROLE.UNKNOWN)) {
+            filterChain.doFilter(request, response);
+            return;
+        }
 
+        //User logged in
+        if (session != null && session.getAttribute("role") != null) {
+            if (path.endsWith("coffee/") || path.contains("login")
+                    || isPathNotCorrectForUser(role, path)) {
+                res.sendRedirect("logout");
+                return;
+            }
+        }
 
         filterChain.doFilter(request,response);
+    }
+
+    private boolean isPathNotCorrectForUser(User.ROLE role, String path) {
+        return ((role.equals(User.ROLE.USER) && path.contains("admin"))
+                || role.equals(User.ROLE.ADMIN) && path.contains("user"));
     }
 
     @Override
